@@ -6,6 +6,7 @@
 package iikh;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -16,9 +17,11 @@ public class Meal {
     
     private String Name, Date;
     private List<Integer> theRecipes;
+    private List<String> Grocery;
     
     Meal() {
         theRecipes = new ArrayList<>();
+        Grocery = new ArrayList<>();
     }
 
     public String getName() {
@@ -43,17 +46,34 @@ public class Meal {
 
     public void setTheRecipes(List<Integer> theRecipes) {
         this.theRecipes = theRecipes;
+        setGrocery();
+    }
+    
+    public void setGrocery(){
+        List<Recipe> recipesDB = Database.getRecipes();
+        for(Integer e: theRecipes){
+            Grocery.addAll(recipesDB.get(e).getIngredients());
+        }
+        Grocery = new ArrayList<String>(new LinkedHashSet<String>(Grocery));
+
     }
     
     @Override
     public String toString(){
-        String str = "Name of the Meal:\n" + Name + "\nDate:\n" + Date + "\nRecipes:\n";
+        String str = "Name of the Meal:\n-----------------\n" + Name + "\nDate:\n-----\n" + Date + "\nRecipes:\n--------\n";
         List<Recipe> recipesDB = Database.getRecipes();
         int count = 1;
         for (Integer e:theRecipes){
-            str += Integer.toString(count) + ". " + recipesDB.get(e).getName() + " ";
+            str += "(" + Integer.toString(count) + "." + ") " + recipesDB.get(e).getName() + " ";
             count++;
         }
+        str += "\nGrocery Needed for this meal:\n-----------------------------\n";
+        count = 1;
+        for (String e:Grocery){
+            str += "(" + Integer.toString(count) + "." + ") " + e + " ";
+            count++;
+        }
+        
         
         return str;
     }

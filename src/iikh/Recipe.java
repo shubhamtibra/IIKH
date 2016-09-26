@@ -52,10 +52,11 @@ public class Recipe {
         String ingrToString = "";
         int count = 1;
         for(String e: Ingredients){
-            ingrToString += Integer.toString(count) + ". " + e + " ";
+            ingrToString += "(" + Integer.toString(count) + "." + ") " + e + " ";
             count++;
         }
-        return "Name:\n" + Name + "\nIngredients:\n"+ ingrToString + "\nInstructions:\n" + Instructions;
+        return "Name of the Recipe:\n-------------------\n" + Name + "\nIngredients:\n"
+                + "------------\n"+ ingrToString + "\nInstructions:\n-------------\n" + Instructions;
     }
 
 }

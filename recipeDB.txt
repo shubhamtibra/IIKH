@@ -1,5 +1,6 @@
 Maggi,,Noodles@@Water@@TasteMaker@@,,Boil the noodles in water and add tastemaker.
-Coffee,,Coffee_Powder@@Sugar@@Milk@@Water@@,,Put all together and boil.
+Coffee,,Coffee Powder@@Sugar@@Milk@@Water@@,,Put all together and boil.
 Aloo Pakoda,,Aloo@@Pakoda@@Water@@,,Mix the three.
-Paneer Do Pyaaza,,Paneer@@Onion@@,,Nahi pata
+Paneer Do Pyaza,,Paneer@@Onion@@,,Nahi pata
+Gobhi Paratha,,Gobhi@@Flour@@Spices@@,,Bake
 

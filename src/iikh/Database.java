@@ -51,7 +51,7 @@ public class Database {
         try{
             File file = new File("recipeDB.txt");
             try (PrintWriter writer = new PrintWriter(file, "UTF-8")) {
-                String str = converRecipestoString();
+                String str = convertRecipestoString();
                 writer.println(str);
             }
     }
@@ -68,7 +68,7 @@ public class Database {
         try{
             File file = new File("mealDB.txt");
             try (PrintWriter writer = new PrintWriter(file, "UTF-8")) {
-                String str = converMealstoString();
+                String str = convertMealstoString();
                 writer.println(str);
             }
     }
@@ -80,7 +80,7 @@ public class Database {
     }
     
     // convert the database to string format to be stored.
-    static String converRecipestoString(){
+    static String convertRecipestoString(){
         String str = "";
         
         for (Recipe element : recipesDB) { 
@@ -93,7 +93,7 @@ public class Database {
         return str;
     }
     
-    static String converMealstoString(){
+    static String convertMealstoString(){
         String str = "";
         for(Meal element: mealsDB){
             String rcps = "";
@@ -222,6 +222,7 @@ public class Database {
                 
         }
         writeRecipestotxt();
+        readMealsFromtxt();
     }
     
     // add a new meal to the plan manager.
@@ -249,26 +250,54 @@ public class Database {
     
     public static String showRecipes(){
         String r;
-        int x = 0;
+        int x = 0, count = 1;
         r = "";
         for(Recipe element: recipesDB){
             if (x==1) r += "\n\n";
+            r += "Recipe No. " + Integer.toString(count) + ":\n^^^^^^^^^^^^^\n";
             r += element.toString();
             x = 1;
+            count++;
         }
         return r;
     }
     
     public static String showMeals(){
         String r;
-        int x = 0;
+        int x = 0, count = 1;
         r = "";
         for(Meal element: mealsDB){
             if (x==1) r += "\n\n";
+            r += "Meal No. " + Integer.toString(count) + ":\n^^^^^^^^^^^\n";
             r += element.toString();
             x = 1;
+            count++;
         }
         return r;
+    }
+    
+     public static String searchByDate(){
+         System.out.println("Please provide the date you want to search meals for\n");
+         Scanner dateio = new Scanner(System.in);
+         String Date = dateio.nextLine();
+        List<Meal> result = new ArrayList<>();
+         for (Meal e: mealsDB){
+            if (e.getDate().equals(Date)) result.add(e);
+        }
+
+        String r;
+        int x = 0, count = 1;
+        r = "***********************************************\n# These are the Meals we found on " + Date + ""
+                + " #\n***********************************************\n";
+        for(Meal element: result){
+            if (x==1) r += "\n\n";
+            r += "Meal No. " + Integer.toString(count) + ":\n^^^^^^^^^^^\n";
+            r += element.toString();
+            x = 1;
+            count++;
+        }
+        return r;
+
     }
     
 }
